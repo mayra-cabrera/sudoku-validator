@@ -1,3 +1,6 @@
 .rspec
 /.bundle/
 /bin/
+*.swp
+*.swo
+

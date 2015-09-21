@@ -1,6 +1,9 @@
+require_relative 'sudoku'
+
 class Validator
   def initialize(puzzle_string)
     @puzzle_string = puzzle_string
+    @result = ""
   end
 
   def self.validate(puzzle_string)
@@ -8,10 +11,18 @@ class Validator
   end
 
   def validate
-    # Start creating your solution here.
-    #
-    # It's likely that you'll want to have many more classes than this one that
-    # was provided for you. Don't be hesistant to extract new objects (and
-    # write tests for them).
+    puzzle = Sudoku.new(@puzzle_string)
+    puzzle.validate
+    if puzzle.valid?
+      if puzzle.complete?
+        "This sudoku is valid."
+      else
+        "This sudoku is valid, but incomplete."
+      end
+    else
+      "This sudoku is invalid."
+    end
   end
 end
+file = File.read(ARGV[0])
+p Validator.validate file 
